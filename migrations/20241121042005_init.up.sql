@@ -1,0 +1,19 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE devices (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE sensor_readings (
+    id SERIAL PRIMARY KEY,
+    device_id UUID REFERENCES devices(id) ON DELETE CASCADE,
+    reading_time TIMESTAMPTZ NOT NULL,
+    amperes DOUBLE PRECISION NOT NULL,
+    voltage DOUBLE PRECISION NOT NULL
+);
+
+
