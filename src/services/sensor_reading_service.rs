@@ -18,7 +18,7 @@ async fn insert_reading(
     reading: &CreateSensorReadingSchema,
 ) -> Result<SensorReading, sqlx::Error> {
     let query = r#"
-        INSERT INTO readings (device_id, reading_time, amperes, voltage)
+        INSERT INTO sensor_readings (device_id, reading_time, amperes, voltage)
         VALUES ($1, $2, $3, $4)
         RETURNING id, device_id, reading_time, amperes, voltage
     "#;
